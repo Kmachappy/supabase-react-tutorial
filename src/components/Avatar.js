@@ -14,22 +14,27 @@ export default function Avatar({ url, size, onUpload }) {
       const { data, error } = await supabase.storage
         .from("avatars")
         .download(path);
-      if (error) throw error;
+      if (error) {
+        throw error;
+      }
       const url = URL.createObjectURL(data);
       setAvatarUrl(url);
     } catch (error) {
       console.log("Error downloading image: ", error.message);
     }
   };
-  const uploadAvatar = async (e) => {
+
+  const uploadAvatar = async (event) => {
     try {
       setUploading(true);
-      if (!e.target.files || e.target.files.length === 0) {
+
+      if (!event.target.files || event.target.files.length === 0) {
         throw new Error("You must select an image to upload.");
       }
-      const file = e.target.files[0];
+
+      const file = event.target.files[0];
       const fileExt = file.name.split(".").pop();
-      const fileName = `${supabase.auth.user().id}.${fileExt}`;
+      const fileName = `${Math.random()}.${fileExt}`;
       const filePath = `${fileName}`;
 
       let { error: uploadError } = await supabase.storage
@@ -52,7 +57,7 @@ export default function Avatar({ url, size, onUpload }) {
     <div style={{ width: size }} aria-live="polite">
       <img
         src={avatarUrl ? avatarUrl : `https://place-hold.it/${size}x${size}`}
-        alt={avatarUrl ? "User avatar" : "No Image"}
+        alt={avatarUrl ? "Avatar" : "No image"}
         className="avatar image"
         style={{ height: size, width: size }}
       />
@@ -63,7 +68,7 @@ export default function Avatar({ url, size, onUpload }) {
           <label className="button primary block" htmlFor="single">
             Upload an avatar
           </label>
-          <div className="visuall-hidden">
+          <div className="visually-hidden">
             <input
               type="file"
               id="single"

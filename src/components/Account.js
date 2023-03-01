@@ -10,6 +10,7 @@ const Account = ({ session }) => {
 
   useEffect(() => {
     getProfile();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
 
   const getProfile = async () => {
@@ -69,16 +70,13 @@ const Account = ({ session }) => {
   return (
     <div aria-live="polite">
       {loading ? (
-        "Saving..."
+        "Saving ..."
       ) : (
         <form onSubmit={updateProfile} className="form-widget">
           <Avatar
             url={avatar_url}
             size={150}
-            onUpload={(url) => {
-              setAvatarUrl(url);
-              updateProfile({ username, website, avatar_url: url });
-            }}
+            onUpload={(url) => setAvatarUrl(url)}
           />
           <div>Email: {session.user.email}</div>
           <div>
@@ -100,8 +98,8 @@ const Account = ({ session }) => {
             />
           </div>
           <div>
-            <button className="button primary block" disbable={loading}>
-              Update Profile
+            <button className="button primary block" disabled={loading}>
+              Update profile
             </button>
           </div>
         </form>

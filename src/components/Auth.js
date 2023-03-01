@@ -24,8 +24,8 @@ export default function Auth() {
     <div className="row flex-center flex">
       <div className="col-6 form-widget" aria-live="polite">
         <h1 className="header">Supabase + React</h1>
-        <p className="decription">
-          Sign in via magic link with you email below
+        <p className="description">
+          Sign in via magic link with your email below
         </p>
         {loading ? (
           "Sending magic link..."
@@ -36,14 +36,14 @@ export default function Auth() {
               id="email"
               className="inputField"
               type="email"
-              placeholder="Enter your email"
+              placeholder="Your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <button
               className="button block"
-              style={{ marginTop: "2rem" }}
               aria-live="polite"
+              style={{ marginTop: "2rem" }}
             >
               Send magic link
             </button>
