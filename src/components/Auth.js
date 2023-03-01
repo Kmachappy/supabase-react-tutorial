@@ -40,7 +40,11 @@ export default function Auth() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <button className="button block" aria-live="polite">
+            <button
+              className="button block"
+              style={{ marginTop: "2rem" }}
+              aria-live="polite"
+            >
               Send magic link
             </button>
           </form>
