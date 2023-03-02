@@ -17,7 +17,6 @@ const Account = ({ session }) => {
     try {
       setLoading(true);
       const { user } = session;
-
       let { data, error, status } = await supabase
         .from("profiles")
         .select(`username, website, avatar_url`)
@@ -70,7 +69,7 @@ const Account = ({ session }) => {
   return (
     <div aria-live="polite">
       {loading ? (
-        "Saving ..."
+        <div style={{ margin: "1rem" }}>Loading ...</div>
       ) : (
         <form onSubmit={updateProfile} className="form-widget">
           <Avatar
